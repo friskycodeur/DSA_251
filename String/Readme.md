@@ -1,6 +1,6 @@
 ### [Reverse String Word Wise](https://www.codingninjas.com/studio/problems/reverse-string-word-wise_1262348?utm_source=youtube&utm_medium=affiliate&utm_campaign=parikh_youtube&leftPanelTabValue=SUBMISSION)
 
-```
+```java
 import java.util.Scanner;
 
 class Solution {
@@ -38,7 +38,7 @@ class Solution {
 
 
 Sol-1 : 
-```
+``` java
 import java.util.* ;
 import java.io.*; 
 public class Solution {
@@ -67,7 +67,7 @@ public class Solution {
 
 Sol-2:
 
-```
+``` java
 import java.util.* ;
 import java.io.*; 
 public class Solution {
@@ -93,7 +93,7 @@ public class Solution {
 
 ### [Minimum Parentheses](https://www.codingninjas.com/studio/problems/mnfrj_1075018?utm_source=youtube&utm_medium=affiliate&utm_campaign=parikh_youtube&leftPanelTabValue=PROBLEM)
 
-```
+``` Java
 import java.util.* ;
 import java.io.*; 
 public class Solution {
@@ -111,5 +111,37 @@ public class Solution {
 		}
 		return open_pr+close_pr;
 	}
+}
+```
+
+### [Beautiful String](https://www.codingninjas.com/studio/problems/beautiful-string_1115625?utm_source=youtube&utm_medium=affiliate&utm_campaign=parikh_youtube&leftPanelTabValue=SUBMISSION)
+
+``` Java
+public class Solution {
+    public static int makeBeautiful(String str) {
+        int n = str.length();
+        int diff_zero = get_diff_size(generate_ans_str(n, 0), str);
+        int diff_one = get_diff_size(generate_ans_str(n, 1), str);
+        return diff_one>diff_zero?diff_zero:diff_one;
+    }
+
+    public static String generate_ans_str(int size, int start_number){
+        StringBuilder ans = new StringBuilder();
+        if(size==0) return ans.toString();
+        ans.append(start_number);
+        for(int i=1;i<size;i++){
+            int curr_bin_num = (ans.charAt(i-1) == '1')? 0 : 1;
+            ans.append(curr_bin_num);
+        }
+        return ans.toString();
+    }
+
+    public static int get_diff_size(String s1, String s2){
+        int diff_size = 0, n= s1.length();
+        for(int i=0;i<n;i++){
+            if(s1.charAt(i) != s2.charAt(i)) diff_size++;
+        }
+        return diff_size;
+    }
 }
 ```
