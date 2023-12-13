@@ -145,3 +145,106 @@ public class Solution {
     }
 }
 ```
+
+### [Given a string, find the next smallest palindrome](https://www.codingninjas.com/studio/problems/given-a-string-find-the-next-smallest-palindrome_874577?utm_source=youtube&utm_medium=affiliate&utm_campaign=parikh_youtube&leftPanelTabValue=SUBMISSION)
+
+``` Java
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+
+	public static StringBuilder reverse_str(StringBuilder s1){
+		StringBuilder s2 = new StringBuilder();
+		for(int i=s1.length()-1;i>=0;i--){
+			s2.append(s1.charAt(i));
+		}
+		return s2;
+	}
+
+	public static int compare_str(StringBuilder s1, StringBuilder s2){
+		for(int i=0;i<s1.length();i++){
+			if (Character.getNumericValue(s1.charAt(i))  > Character.getNumericValue(s2.charAt(i))) return 1;
+			else if(Character.getNumericValue(s1.charAt(i))  < Character.getNumericValue(s2.charAt(i))) return 2;
+			else continue;
+		}
+		return 0;
+	}
+	public static String handle_odd(String s, int n){
+		StringBuilder ans = new StringBuilder();
+		StringBuilder left = new StringBuilder(s.substring(0, n/2));
+		char mid = s.charAt(n/2);
+		StringBuilder right = new StringBuilder(s.substring(n/2+1, n));
+		if(compare_str(reverse_str(left), right) == 1 ){
+			ans.append(left);
+			ans.append(mid);
+			ans.append(reverse_str(left));
+		} else {
+			left = left.append(mid);
+			left = new StringBuilder(add_one(left.toString()));
+			ans.append(left);
+			ans.append(reverse_str(left).substring(1));
+		}
+		return ans.toString();
+	}
+
+	public static String handle_even(String s, int n){
+		StringBuilder ans = new StringBuilder();
+		StringBuilder left = new StringBuilder(s.substring(0, n/2)); 
+		StringBuilder right = new StringBuilder(s.substring(n/2, n));
+		if(compare_str(reverse_str(left), right) == 1 ){
+			ans.append(left);
+			ans.append(reverse_str(left));
+		} else {
+			left = new StringBuilder(add_one(left.toString()));
+			ans.append(left);
+			ans.append(reverse_str(left));
+		}
+		return ans.toString();
+	}
+	public static String nextLargestPalindrome(String number, int sz) {
+		// Write your code here.
+        String ans = "";
+		if(is_palindrome(number, sz)){
+			number = add_one(number);
+			sz = number.length();
+		}
+		if(sz==1) return number;
+        if(sz%2==1){
+			ans = handle_odd(number,sz);
+		} else{
+			ans = handle_even(number,sz);
+		}
+		return ans;
+	}
+
+	public static boolean is_palindrome(String s, int n){
+		int i=0,j=n-1;
+		while(j>=i){
+			if(s.charAt(i) != s.charAt(j)) return false;
+			i++;j--;
+		}
+		return true;
+	}
+
+	public static String add_one(String s){
+		char[] digits = s.toCharArray();
+        int carry = 1;
+
+        for (int i = digits.length - 1; i >= 0; i--) {
+            int sum = Character.getNumericValue(digits[i]) + carry;
+            carry = sum / 10;
+            digits[i] = (char) ((sum % 10) + '0');
+        }
+
+        StringBuilder result = new StringBuilder(s.length() + 1);
+
+        if (carry > 0) {
+            result.append((char) (carry + '0'));
+        }
+
+        result.append(digits);
+
+        return result.toString();
+	}
+}
+```
