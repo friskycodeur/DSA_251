@@ -1,5 +1,7 @@
-### [Reverse String Word Wise](https://www.codingninjas.com/studio/problems/reverse-string-word-wise_1262348?utm_source=youtube&utm_medium=affiliate&utm_campaign=parikh_youtube&leftPanelTabValue=SUBMISSION)
+## [Reverse String Word Wise](https://www.codingninjas.com/studio/problems/reverse-string-word-wise_1262348)
 
+
+### Solution - Java
 ```java
 import java.util.Scanner;
 
@@ -32,13 +34,33 @@ class Solution {
 }
 ```
 
+### Solution - Python
+```python
+def reverseStringWordWise(string):
+    ans = []
+    i = len(string) - 1 
 
-### [Encode the Message](https://www.codingninjas.com/studio/problems/encode-the-message_699836?utm_source=youtube&utm_medium=affiliate&utm_campaign=parikh_youtube&leftPanelTabValue=SUBMISSION)
+    while(i>=0):
+        while i>=0 and string[i] == " " :
+            i-=1
+        j = i
+        if i<0:
+            break
+        while i>=0 and string[i] != " ":
+            i-=1
+        ans.append(string[i+1:j+1])
+    
+    return " ".join(ans)
+```
+
+
+## [Encode the Message](https://www.codingninjas.com/studio/problems/encode-the-message_699836)
 
 
 
-Sol-1 : 
+### Solution - Java
 ``` java
+// Approach #1
 import java.util.* ;
 import java.io.*; 
 public class Solution {
@@ -63,11 +85,9 @@ public class Solution {
 		return ans.toString();
 	}
 }
-```
 
-Sol-2:
+// Approach #2
 
-``` java
 import java.util.* ;
 import java.io.*; 
 public class Solution {
@@ -91,8 +111,27 @@ public class Solution {
 ```
 
 
-### [Minimum Parentheses](https://www.codingninjas.com/studio/problems/mnfrj_1075018?utm_source=youtube&utm_medium=affiliate&utm_campaign=parikh_youtube&leftPanelTabValue=PROBLEM)
+### Solution - Python
 
+```python
+def encode(message):
+    n,i = len(message),0
+    ans = []
+    while i < n:
+        char = message[i]
+        cnt = 1
+        while i+1 < n and message[i+1] == char:
+            i+=1
+            cnt+=1
+        ans.append(char+str(cnt))    
+        i+=1
+    return ''.join(ans)
+```
+
+
+## [Minimum Parentheses](https://www.codingninjas.com/studio/problems/mnfrj_1075018)
+
+### Solution - Java
 ``` Java
 import java.util.* ;
 import java.io.*; 
@@ -114,7 +153,25 @@ public class Solution {
 }
 ```
 
-### [Beautiful String](https://www.codingninjas.com/studio/problems/beautiful-string_1115625?utm_source=youtube&utm_medium=affiliate&utm_campaign=parikh_youtube&leftPanelTabValue=SUBMISSION)
+### Solution - Python
+```python
+def minimumParentheses(pattern):
+    leftPar,rightPar = 0,0
+    for s in pattern:
+        if s == '(':
+            leftPar += 1
+        elif s == ')':
+            if leftPar > 0:
+                leftPar -= 1
+            else:               
+                rightPar += 1
+    
+    return (leftPar + rightPar)
+```
+
+## [Beautiful String](https://www.codingninjas.com/studio/problems/beautiful-string_1115625)
+
+### Solution - Java
 
 ``` Java
 public class Solution {
@@ -146,8 +203,29 @@ public class Solution {
 }
 ```
 
-### [Given a string, find the next smallest palindrome](https://www.codingninjas.com/studio/problems/given-a-string-find-the-next-smallest-palindrome_874577?utm_source=youtube&utm_medium=affiliate&utm_campaign=parikh_youtube&leftPanelTabValue=SUBMISSION)
+### Solution - Python
 
+```python
+def makeBeautiful(str):
+	n = len(str)
+	diffWithZero = generate_diff_size(generate_ans_str(n,0),str)
+	diffWithOne = generate_diff_size(generate_ans_str(n,1),str)
+	return min(diffWithZero,diffWithOne)
+
+
+def generate_ans_str(size,startNumber):
+	ans = [str(startNumber)]
+	ans.extend(str(0 if ans[-1] == '1' else 1) for _ in range(1,size))
+	return ''.join(ans)
+
+def generate_diff_size(s1,s2):
+	return sum(ch1!=ch2 for ch1,ch2 in zip(s1,s2))
+```
+
+## [Given a string, find the next smallest palindrome](https://www.codingninjas.com/studio/problems/given-a-string-find-the-next-smallest-palindrome_874577)
+
+
+### Solution - Java
 ``` Java
 import java.util.* ;
 import java.io.*; 
@@ -247,4 +325,10 @@ public class Solution {
         return result.toString();
 	}
 }
+```
+
+### Solution - Python
+
+```python
+
 ```
