@@ -8,3 +8,4 @@
 | [Maps/Sets](https://github.com/friskycodeur/DSA_251/tree/master/Maps_Set)                     | Completed     | 5 | 5 |
 | [Two Pointers](https://github.com/friskycodeur/DSA_251/tree/master/Two_Pointers)              | Completed     | 4 | 4 |
 | [Basic Algorithms](https://github.com/friskycodeur/DSA_251/tree/master/Basic_Algorithms)      | In Progress   | 6 | 0 |
+| [Mixed Questions](https://github.com/friskycodeur/DSA_251/tree/master/Mixed%20Questions)      | In Progress   | 20 | 2 |
