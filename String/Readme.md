@@ -330,5 +330,53 @@ public class Solution {
 ### Solution - Python
 
 ```python
+def nextLargestPalindrome(s, length):
+    if s == s[::-1]:
+        s = addOneToString(s)
+        length = len(s)
+    if length == 1:
+        return s
+    
+    if(length%2 == 0):
+        s= evenCase(s,length)
+    else:
+        s= oddCase(s,length)
 
+    return s
+
+def addOneToString(s):
+    digits = [int(digit) for digit in s]
+    carry = 1
+    for i in range(len(digits)-1,-1,-1):
+        digits[i] += carry
+        carry = digits[i] // 10
+        digits[i] %=10
+    
+    if carry:
+        digits.insert(0,carry)
+
+    return ''.join(map(str,digits))
+
+def oddCase(s,n):
+    leftSide,midEle,rightSide = s[:int(n//2)], s[int(n//2)], s[int(n//2)+1:]
+    ans = []
+
+    if int(leftSide[::-1]) < int(rightSide):
+        leftSide = addOneToString(leftSide+midEle)
+        ans.append(leftSide+leftSide[::-1][1:])
+    else:
+        ans.append(leftSide + midEle + leftSide[::-1])
+
+    return ''.join(ans)
+
+
+def evenCase(s,n):
+    leftSide,rightSide = s[:int(n/2)], s[int(n/2):]
+    ans = []
+
+    if int(leftSide[::-1]) < int(rightSide):
+        leftSide = addOneToString(leftSide)
+    
+    ans.append(leftSide+leftSide[::-1])
+    return ''.join(ans)
 ```
