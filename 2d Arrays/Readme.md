@@ -1,6 +1,6 @@
-### [Sum Of Zeroes](https://www.codingninjas.com/studio/problems/array-sum_893287?utm_source=youtube&utm_medium=affiliate&utm_campaign=parikh_youtube&leftPanelTabValue=PROBLEM)
+## [Sum Of Zeroes](https://www.codingninjas.com/studio/problems/array-sum_893287)
 
-
+### Solution - Java
 ```java
 import java.util.* ;
 import java.io.*; 
@@ -36,9 +36,28 @@ public class Solution {
 
 ```
 
-### [Matrix Is Symmetric](https://www.codingninjas.com/studio/problems/matrix-is-symmetric_799361?utm_source=youtube&utm_medium=affiliate&utm_campaign=parikh_youtube&leftPanelTabValue=SUBMISSION)
+### Solution - Python
+```python
+def coverageOfMatrix(mat):
+    n,m = len(mat),len(mat[0])
+    sum_zeroes = 0
+    for i in range(n):
+        for j in range(m):
+            if mat[i][j] == 1:
+                continue
+            if (i-1) in range(n):
+                sum_zeroes += mat[i-1][j]
+            if (i+1) in range(n):
+                sum_zeroes += mat[i+1][j]
+            if (j-1) in range(m):
+                sum_zeroes += mat[i][j-1]
+            if (j+1) in range(m):
+                sum_zeroes += mat[i][j+1]
+    return sum_zeroes
+```
+### [Matrix Is Symmetric](https://www.codingninjas.com/studio/problems/matrix-is-symmetric_799361)
 
-
+### Solution - Java
 ```java
 import java.util.* ;
 import java.io.*; 
@@ -57,10 +76,21 @@ public class Solution {
 }
 ```
 
+### Solution - Python
+```python
+def isMatrixSymmetric(matrix):
+    n,m = len(matrix), len(matrix[0])
+    for i in range(n):
+        for j in range(i,m):
+            if matrix[i][j] != matrix[j][i]:
+                return False 
+    return True 
+```
 
-### [Set Matrix Zeros](https://www.codingninjas.com/studio/problems/set-matrix-zeros_3846774?utm_source=youtube&utm_medium=affiliate&utm_campaign=parikh_youtube&leftPanelTabValue=PROBLEM)
 
+### [Set Matrix Zeros](https://www.codingninjas.com/studio/problems/set-matrix-zeros_3846774)
 
+### Solution - Java
 ```java
 import java.io.*;
 import java.util.* ;
@@ -100,12 +130,44 @@ public class Solution {
     }
 }
 ```
+### Solution - Python
+
+```python
+def setZeros(matrix: List[List[int]]) -> None:
+    n, m, colZero = len(matrix), len(matrix[0]), False
+
+    for i in range(n):
+        if matrix[i][0] == 0:
+            colZero = True
+    
+    for j in range(m):
+        if matrix[0][j] == 0:
+            matrix[0][0] = 0
+
+    for i in range(1, n):
+        for j in range(1, m):
+            if matrix[i][j] == 0:
+                matrix[i][0] = 0
+                matrix[0][j] = 0
+    
+    for i in range(1, n):
+        for j in range(1, m):
+            if matrix[0][j] == 0 or matrix[i][0] == 0:
+                matrix[i][j] = 0
+
+    if matrix[0][0] == 0:
+        for j in range(m):
+            matrix[0][j] = 0
+
+    if colZero:
+        for i in range(n):
+            matrix[i][0] = 0
+```
+
+### [ Inplace rotate matrix 90 degree](https://www.codingninjas.com/studio/problems/inplace-rotate-matrix-90-degree_839734)
 
 
-
-### [ Inplace rotate matrix 90 degree](https://www.codingninjas.com/studio/problems/inplace-rotate-matrix-90-degree_839734?utm_source=youtube&utm_medium=affiliate&utm_campaign=parikh_youtube&leftPanelTabValue=PROBLEM)
-
-
+### Solution - Java
 ```java
 import java.util.* ;
 import java.io.*; 
@@ -135,11 +197,24 @@ public class Solution {
 }
 ```
 
+### Solution - Python
 
-### [Print Spiral](https://www.codingninjas.com/studio/problems/print-spiral_547?utm_source=youtube&utm_medium=affiliate&utm_campaign=parikh_youtube&leftPanelTabValue=PROBLEM)
+```python
+def inplaceRotate(inputArray, n):
+    for i in range(n):
+        inputArray[i] = inputArray[i][::-1]
+    
+    for i in range(n):
+        for j in range(i,n):
+            inputArray[i][j],inputArray[j][i] = inputArray[j][i],inputArray[i][j]
+
+    return inputArray
+```
+
+### [Print Spiral](https://www.codingninjas.com/studio/problems/print-spiral_547)
 
 
-
+### Solution - Java
 ```java
 
 
@@ -182,3 +257,5 @@ public class Solution {
 	}
 }
 ```
+
+### Solution - Python
