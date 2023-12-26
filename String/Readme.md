@@ -222,6 +222,21 @@ def generate_diff_size(s1,s2):
 	return sum(ch1!=ch2 for ch1,ch2 in zip(s1,s2))
 ```
 
+### Solution 2 - Python
+
+```python
+def makeBeautiful(s):
+	count = 0
+	n = len(s)
+	
+	for i in range(n):
+		if i%2==0:
+			count += 1 if s[i] == '1' else 0
+		else:
+			count += 1 if s[i] == '0' else 0
+	return min(count,n-count)
+```
+
 ## [Given a string, find the next smallest palindrome](https://www.codingninjas.com/studio/problems/given-a-string-find-the-next-smallest-palindrome_874577)
 
 
