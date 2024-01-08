@@ -129,3 +129,43 @@ def findKthElement(a, b, k):
 	return 1
 ```
 
+## [Family Structure](https://www.codingninjas.com/studio/problems/family-structure_981243)
+
+
+### Solution - Python
+```python
+def kthChildNthGeneration(gen, pos):
+    if gen==1 or pos==1:
+        return 'Male'
+    par_pos = (pos+1)//2
+    parent_gender = kthChildNthGeneration(gen-1,par_pos)
+    if pos == (2 * par_pos) - 1:
+        return parent_gender
+    else:
+        return 'Female' if parent_gender == 'Male' else 'Male'
+```
+
+## [Binary strings with no consecutive 1s.](https://www.codingninjas.com/studio/problems/binary-strings-with-no-consecutive-1s_893001)
+
+
+### Solution - Python
+```python
+from typing import List
+
+def generateString(n: int) -> List[str]:
+    res = []
+    getAllBinaryStrings("0",n,res)
+    getAllBinaryStrings("1",n,res)
+    return res
+
+def getAllBinaryStrings(s,n,res):
+    sz = len(s)
+    if(sz==n):
+        res.append(s)
+    elif s[sz-1] == '1':
+        getAllBinaryStrings(s+'0',n,res)
+    else:
+        getAllBinaryStrings(s+'0',n,res)
+        getAllBinaryStrings(s+'1',n,res)
+```
+
