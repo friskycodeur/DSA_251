@@ -96,3 +96,77 @@ class Solution:
         slow.next = slow.next.next
         return start.next
 ```
+
+## [Detect and Remove Loop](https://www.codingninjas.com/studio/problems/interview-shuriken-42-detect-and-remove-loop_241049)
+
+### Solution - Python
+
+```python
+def removeLoop(head :Node) -> Node :
+    fast = slow = head
+    while fast!=None and fast.next !=None:
+        fast = fast.next.next
+        slow = slow.next
+        if (fast == slow):
+            slow.next = None
+            break
+    return head
+```
+
+## [Swap Nodes in Pairs](https://www.codingninjas.com/studio/problems/pair-swap_759396)
+
+### Solution - Python
+
+```python
+def pairsSwap(head):
+    if head!=None and head.next!=None:
+        # Swap data of pairs
+        head.data,head.next.data = head.next.data,head.data
+        # Call for next pair
+        pairsSwap(head.next.next)
+    return head
+```
+
+## [Segregate Odd-Even](https://www.codingninjas.com/studio/problems/segregate-odd-even_920524)
+
+### Solution - Python
+
+```python
+class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+def segregateOddEven(head):
+    evenStart = oddStart = oddEnd = evenEnd = None
+    current = head
+    while current is not None:
+        num = current.data
+        if(num%2==0):
+            if(evenStart is None):
+                evenStart = current
+                evenEnd = evenStart
+            else:
+                evenEnd.next = current
+                evenEnd = evenEnd.next
+        else:
+            if(oddStart is None):
+                oddStart = current
+                oddEnd = oddStart
+            else:
+                oddEnd.next = current
+                oddEnd = oddEnd.next
+        current = current.next
+    
+    if oddStart is None and evenStart is not None:
+        evenEnd.next = None
+        head = evenStart
+    elif oddStart is not None and evenStart is None:
+        oddEnd.next = None
+        head = oddStart
+    else:
+        oddEnd.next = evenStart
+        evenEnd.next = None
+        head = oddStart
+    return head
+
