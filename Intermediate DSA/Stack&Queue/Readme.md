@@ -104,3 +104,97 @@ class Solution:
 
         return len(parStack) == 0  
 ```
+
+
+## [ Implement a Queue](https://www.codingninjas.com/studio/problems/2099908)
+
+### Solution - Python (Via Array)
+
+```python
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+class Queue :
+    #Define data members and __init__()
+    
+    def __init__(self):
+        self.frontIdx = 0
+        self.rear = 0
+        # Taking custom capacity as 5000 as it is the max queries that can be made in the qsn
+        self.capacity = 5000
+        self.q = [None]*5000
+
+    '''----------------- Public Functions of Queue -----------------'''
+    
+    def isEmpty(self) :
+        #Implement the isEmpty() function
+        return self.frontIdx == self.rear
+
+    def enqueue(self, data) :
+        #Implement the enqueue(element) function
+        self.q[self.rear] = data
+        self.rear +=1 
+
+    def dequeue(self) :
+        if self.isEmpty():
+            return -1
+        num = self.q[self.frontIdx]
+        self.frontIdx +=1
+        return num
+
+    def front(self) :
+        #Implement the front() function
+        if self.isEmpty():
+            return -1
+        return self.q[self.frontIdx]
+```
+
+
+### Solution - Python (Via LinkedList)
+
+```python
+from os import *
+from sys import *
+from collections import *
+from math import *
+
+class Node:
+
+    def __init__(self,data,nextNode=None):
+        self.data = data
+        self.next = nextNode
+
+class Queue :
+
+    def __init__(self):
+        self.frontNode = self.rearNode = None
+
+    '''----------------- Public Functions of Queue -----------------'''
+
+    def isEmpty(self) :
+        return self.frontNode == None
+
+    def enqueue(self, data) :
+        newNode = Node(data)
+        if self.rearNode == None:
+            self.rearNode = self.frontNode = newNode
+        else:
+            self.rearNode.next = newNode
+            self.rearNode = newNode
+
+    def dequeue(self) :
+        if self.isEmpty():
+            return -1
+        deleteNode = self.frontNode
+        self.frontNode = self.frontNode.next
+        if(self.frontNode == None):
+            self.rearNode = None
+        return deleteNode.data
+
+    def front(self) :
+        if self.isEmpty():
+            return -1
+        return self.frontNode.data
+```
