@@ -198,3 +198,63 @@ class Queue :
             return -1
         return self.frontNode.data
 ```
+## [Implement Queue Using Stack](https://leetcode.com/problems/implement-queue-using-stacks/description/)
+
+### Solution - Python
+
+```python
+class MyQueue:
+
+    def __init__(self):
+        self.s1 = []
+        self.s2 = []
+
+    def push(self, x: int) -> None:
+        while len(self.s1):
+            self.s2.append(self.s1.pop())
+        self.s1.append(x)
+        while len(self.s2):
+            self.s1.append(self.s2.pop())
+
+    def pop(self) -> int:
+        if len(self.s1) == 0:
+            return -1
+        return self.s1.pop()
+
+    def peek(self) -> int:
+        return self.s1[len(self.s1)-1]
+
+    def empty(self) -> bool:
+        return len(self.s1) == 0
+```
+## [Implement Stack Using Queue](https://leetcode.com/problems/implement-stack-using-queues/description/)
+
+### Solution - Python
+
+```python
+from queue import Queue 
+class MyStack:
+
+    def __init__(self):
+        self.q = Queue()
+
+    def push(self, x: int) -> None:
+        sz = self.q.qsize()
+        self.q.put(x)
+        for i in range(sz):
+            self.q.put(self.q.get())
+
+    def pop(self) -> int:
+        if self.empty():
+            return -1
+        return self.q.get()
+
+    def top(self) -> int:
+        if self.empty():
+            return -1
+        return self.q.queue[0]
+
+    def empty(self) -> bool:
+        return self.q.qsize() == 0
+```
+
