@@ -258,3 +258,133 @@ class MyStack:
         return self.q.qsize() == 0
 ```
 
+## [Min Stack](https://leetcode.com/problems/min-stack)
+
+### Solution - Python
+
+```python
+class MinStack:
+
+    def __init__(self):
+        self.stack = []
+        self.minStack = []
+
+    def push(self, val: int) -> None:
+        self.stack.append(val)
+        if(self.minStack):
+            val = min(val,self.minStack[-1])
+        self.minStack.append(val)
+
+    def pop(self) -> None:
+        self.stack.pop()
+        self.minStack.pop()
+
+    def top(self) -> int:
+        return self.stack[-1]
+
+    def getMin(self) -> int:
+        return self.minStack[-1]
+```
+
+## [Next Greater Element](https://leetcode.com/problems/next-greater-element-ii/description/)
+
+### Solution - Python(Circular Variant)
+
+```python
+class Solution:
+    def nextGreaterElements(self, nums: List[int]) -> List[int]:
+        st = []
+        n = len(nums)
+        ans = [-1]*n
+        for i in range(2*n-1,-1,-1):
+            while st and nums[i%n]>=st[-1]:
+                st.pop()
+            if i<n and st:
+                    ans[i]=st[-1]
+            st.append(nums[i%n])
+        return ans
+
+```
+
+### Solution - Python(Non-Circular variant)
+
+```python
+def nextGreater(nums,n):
+    st = []
+    ans = [-1]*n
+    for i in range(n-1,-1,-1):
+        while st and nums[i%n]>=st[-1]:
+            st.pop()
+        if i<n and st:
+                ans[i]=st[-1]
+        st.append(nums[i%n])
+    return ans
+```
+
+## [Stock Span Problem](https://leetcode.com/problems/online-stock-span/)
+
+### Solution - Python(LeetCode Variant)
+
+```python
+class StockSpanner:
+
+    def __init__(self):
+        self.stack = [] # (price,span)
+
+    def next(self, price: int) -> int:
+        span = 1
+        while self.stack and price >= self.stack[-1][0]:
+            span+=self.stack[-1][1]
+            self.stack.pop()
+        self.stack.append((price,span))
+        return span
+
+```
+
+### Solution - Python(Coding Ninja variant)
+
+```python
+class StockSpanner:
+
+    def __init__(self):
+        self.stack = []
+    
+    def next(self,price):
+        span = 1
+        while self.stack and self.stack[-1][0] <= price:
+            span += self.stack[-1][1]
+            self.stack.pop()
+        self.stack.append((price,span))
+        return span
+
+
+def findSpans(price):
+    ans = []
+    obj = StockSpanner()
+    for p in price:
+        ans.append(obj.next(p))
+    return ans
+```
+
+
+## [Reversing a Queue](https://www.codingninjas.com/studio/problems/reversing-a-queue_982934)
+
+### Solution - Python
+
+```python
+def reverseQueue(q):
+    rev(q)
+    return q
+
+
+def rev(q):
+    if q.empty():
+        return
+    
+    frontEle = q.get()
+
+    reverseQueue(q)
+
+    q.put(frontEle)
+```
+
